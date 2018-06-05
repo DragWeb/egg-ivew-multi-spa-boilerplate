@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     'app/app': 'app/web/page/app/app.js',
     'spa/app': 'app/web/page/spa/app.js',
-    template: 'app/web/view/layout.html'
+    'home/app': 'app/web/page/home/app.js'
   },
   alias: {
     app: 'app/web/framework/vue/app.js',
