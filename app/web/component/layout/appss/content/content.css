@@ -1,0 +1,16 @@
+.main {
+  position: relative;
+  margin-left: 200px;
+  min-height: 100%;
+  min-width: 767px;
+  padding: 92px 20px;
+  background-color: #e8ecf0;
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
