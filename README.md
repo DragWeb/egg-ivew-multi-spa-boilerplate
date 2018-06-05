@@ -77,102 +77,150 @@ npm run build
 npm start 
 ```
 
-## 4. 功能实现
+## 4. 目录结构
 
-#### 4.1 单页面前端实现
+```bash
+.
+├── README.md
+├── app
+│   ├── controller
+│   │   ├── app.js          // spa
+│   │   ├── home.js
+│   │   └── spa.js          // spa
+│   ├── middleware
+│   │   └── access.js
+│   ├── mocks
+│   │   └── article
+│   │       └── list.js
+│   ├── router.js
+│   ├── view
+│   └── web
+│       ├── asset
+│       │   ├── css
+│       │   │   ├── app.css
+│       │   │   ├── global.css
+│       │   │   └── normalize.css
+│       │   └── images
+│       │       ├── favicon.ico
+│       │       ├── headbg.jpg
+│       │       ├── loading.gif
+│       │       ├── logo-min.png
+│       │       └── logo.png
+│       ├── component                           // spa框架组件
+│       │   └── layout
+│       │       ├── appss
+│       │       │   ├── content
+│       │       │   │   ├── content.css
+│       │       │   │   └── content.vue
+│       │       │   ├── footer
+│       │       │   │   ├── footer.css
+│       │       │   │   └── footer.vue
+│       │       │   ├── header
+│       │       │   │   ├── header.css
+│       │       │   │   └── header.vue
+│       │       │   ├── index.js
+│       │       │   ├── main.vue
+│       │       │   └── nav
+│       │       │       ├── nav.scss
+│       │       │       └── nav.vue
+│       │       ├── content
+│       │       │   ├── content.css
+│       │       │   └── content.vue
+│       │       ├── error-page
+│       │       │   ├── 403.less
+│       │       │   ├── 403.vue
+│       │       │   ├── 404.less
+│       │       │   ├── 404.vue
+│       │       │   ├── 500.less
+│       │       │   └── 500.vue
+│       │       ├── footer
+│       │       │   ├── footer.css
+│       │       │   └── footer.vue
+│       │       ├── header
+│       │       │   ├── header.css
+│       │       │   └── header.vue
+│       │       ├── index.js
+│       │       ├── main.vue
+│       │       └── nav
+│       │           ├── nav.scss
+│       │           └── nav.vue
+│       ├── framework
+│       │   ├── utils
+│       │   │   └── utils.js
+│       │   └── vue
+│       │       ├── app.js
+│       │       ├── component
+│       │       │   └── index.js
+│       │       ├── directive
+│       │       │   └── index.js
+│       │       └── filter
+│       │           └── index.js
+│       ├── page
+│       │   ├── app                     // spa目录
+│       │   │   ├── app.js
+│       │   │   ├── app.vue
+│       │   │   ├── router
+│       │   │   │   ├── index.js
+│       │   │   │   └── router.js
+│       │   │   └── views
+│       │   │       ├── detail.vue
+│       │   │       ├── error-page
+│       │   │       │   ├── 403.less
+│       │   │       │   ├── 403.vue
+│       │   │       │   ├── 404.less
+│       │   │       │   ├── 404.vue
+│       │   │       │   ├── 500.less
+│       │   │       │   └── 500.vue
+│       │   │       └── list.vue
+│       │   ├── home
+│       │   │   └── home.vue
+│       │   └── spa                     // spa目录
+│       │       ├── app.js
+│       │       ├── app.vue
+│       │       ├── router
+│       │       │   ├── index.js
+│       │       │   └── router.js
+│       │       └── views
+│       │           ├── detail.vue
+│       │           ├── error-page
+│       │           │   ├── 403.less
+│       │           │   ├── 403.vue
+│       │           │   ├── 404.less
+│       │           │   ├── 404.vue
+│       │           │   ├── 500.less
+│       │           │   └── 500.vue
+│       │           └── list.vue
+│       ├── store
+│       │   ├── index.js
+│       │   └── modules
+│       │       ├── app.js
+│       │       └── user.js
+│       └── view
+│           └── layout.html
+├── config
+│   ├── config.default.js
+│   ├── config.local.js
+│   ├── config.prod.js
+│   ├── config.test.js
+│   ├── manifest.json
+│   ├── plugin.js
+│   └── plugin.local.js
+├── docs
+├── index.js
+├── logs
+│   ├── common-error.log
+│   ├── egg-web.log
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+├── run
+│   ├── agent_config.json
+│   ├── agent_config_meta.json
+│   ├── application_config.json
+│   ├── application_config_meta.json
+│   └── router.json
+└── webpack.config.js                   // 注意webpack entry配置
 
-在app/web/page 目录下面创建app目录, app.vue, app.js 文件.
-
-- app.vue 编写界面逻辑, 根元素为layout(自定义组件, 全局注册, 统一的html, meta, header, body)
-
-```html
-<template>
-  <app-layout>
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
-  </app-layout>
-</template>
-<style lang="sass">
-
-</style>
-<script type="text/babel">
-  export default {
-    computed: {
-
-    },
-    mounted(){
-
-    }
-  }
-</script>
 ```
 
-- app.js 页面调用入口
-
-```javascript
-import { sync } from 'vuex-router-sync';
-import store from 'store/app';
-import router from 'component/app/router';
-import app from './app.vue';
-import App from 'app';
-import Layout from 'component/layout/app';
-
-App.component(Layout.name, Layout);
-
-sync(store, router);
-
-export default App.init({
-  base: '/app',
-  ...app,
-  router,
-  store
-});
-
-```
-
-#### 4.2 单页面后端实现
-
-- 创建controller文件app.js
-
-```javascript
-exports.index = function* (ctx) {
-  yield ctx.render('app/app.js', { url: this.url.replace(/\/app/, '') });
-};
-```
-
-- 添加路由配置
-
-```javascript
-  app.get('/app(/.+)?', app.controller.app.app.index);
-```
-
-
-## 5. 打包部署
-
-http://hubcarl.github.io/easywebpack/vue/build/
-
-
-## 6. 实现原理
-
-### 6.1 本地`npm start`启动流程
-
-![本地启动流程](http://hubcarl.github.io/img/webpack/npm-start.png)
-
-### 6.2 服务端渲染页面访问流程
-
-![服务端渲染页面访问流程](http://hubcarl.github.io/img/webpack/egg-webpack-vue-ssr.png)
-
-
-### 6.3 详细资料
-
-- [Egg+Vue解决方案开发流程](http://hubcarl.github.io/easywebpack/vue/dev/)
-
-- [基于webpack的前端工程解决方案和egg+vue服务端渲染项目实践](http://hubcarl.github.io/blog/2017/04/15/webpack-project/)
-
-- [koa和egg项目webpack内存编译和热更新实现](http://hubcarl.github.io/blog/2017/04/15/egg-webpack/)
-
-
-## License
-
-[MIT](LICENSE)
