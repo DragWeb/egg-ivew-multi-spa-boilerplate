@@ -1,7 +1,7 @@
 <template>
   
   <div class="nav">
-    <Menu theme="light">
+    <Menu theme="light" style="width:200px;">
       <Submenu name="1">
         <template slot="title">
             <Icon type="ios-paper"></Icon>
@@ -53,7 +53,7 @@
 
     },
     mounted(){
-      this.selectedMenu = window.location.pathname.toLowerCase().replace(/\/$/,'');
+      
     }
   }
 </script>
